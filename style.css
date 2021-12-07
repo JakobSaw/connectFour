@@ -1,0 +1,230 @@
+* {
+    box-sizing: border-box;
+}
+:root {
+    --beige: #fff8f3;
+    --gray: #464646;
+    --red: rgb(216 87 70);
+    /* --red: #e4006e; */
+    --black: #121517;
+    --border-width: 5px;
+    --border-radius: 10px;
+    --circles-width: 15.5px;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--beige);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main {
+    z-index: 3;
+    display: none;
+}
+#board {
+    position: relative;
+    border: var(--border-width) solid var(--gray);
+    border-radius: var(--border-radius);
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+#board div:not(.direction) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(
+        circle,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0) 49%,
+        var(--beige) 50%
+    );
+}
+#board svg {
+    width: var(--circles-width);
+    height: auto;
+    fill: var(--gray);
+    cursor: pointer;
+}
+.direction {
+    position: absolute;
+    background: var(--beige);
+    border-radius: var(--border-radius);
+    width: 100%;
+}
+@keyframes victoryRed {
+    0% {
+        background-color: var(--beige);
+    }
+    50% {
+        background-color: var(--red);
+    }
+    100% {
+        background-color: var(--beige);
+    }
+}
+@keyframes victoryBlack {
+    0% {
+        background-color: var(--beige);
+    }
+    50% {
+        background-color: var(--black);
+    }
+    100% {
+        background-color: var(--beige);
+    }
+}
+@keyframes victoryCoins {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+#foot {
+    border: var(--border-width) solid var(--gray);
+    border-radius: var(--border-radius);
+    background-color: var(--beige);
+}
+.victoryR {
+    animation: victoryRed 0.75s infinite;
+}
+.victoryB {
+    animation: victoryBlack 0.75s infinite;
+}
+.victoryCircle {
+    animation: victoryCoins 0.75s ease-in-out;
+}
+#footSVG {
+    fill: var(--gray);
+}
+#restart {
+    position: absolute;
+    top: auto;
+    width: auto;
+    cursor: pointer;
+    fill: var(--gray);
+}
+#chipsContainer {
+    display: none;
+}
+#chipsContainer,
+#previewContainer,
+#fallDownContainer,
+.red,
+.black {
+    position: absolute;
+}
+#previewContainer,
+#fallDownContainer,
+.red,
+.black,
+#foot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#fallDownContainer {
+    /* display: none; */
+    transition: top 0.75s ease-in-out;
+    top: 0;
+}
+#previewContainer,
+#fallDownContainer {
+    visibility: hidden;
+}
+#previewContainer div {
+    opacity: 0.4;
+}
+#previewContainer div,
+#fallDownContainer div {
+    background: var(--red);
+    width: var(--circles-width);
+    height: var(--circles-width);
+    border-radius: 100%;
+}
+.black div,
+.red div {
+    width: var(--circles-width);
+    height: var(--circles-width);
+    border-radius: 100%;
+}
+.red div {
+    background: var(--red);
+}
+.black div {
+    background: var(--black);
+}
+.counter {
+    width: 7.5vw;
+    height: auto;
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: calc(var(--border-width) / 2);
+}
+.redCounter {
+    justify-content: flex-end;
+}
+.counter div {
+    border-radius: 100%;
+    height: var(--border-width);
+    width: var(--border-width);
+    margin: 0 calc(var(--border-width) / 2);
+}
+.redCounter div {
+    background-color: var(--red);
+}
+.blackCounter div {
+    background-color: var(--black);
+}
+.two_players,
+.against_computer {
+    z-index: 10;
+    width: 30vw;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: calc(var(--border-width) / 4) solid var(--gray);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    opacity: 0.3;
+    transition: all 0.4s ease-in-out;
+}
+.two_players {
+    margin-bottom: 20px;
+}
+.two_players:hover {
+    opacity: 1;
+}
+.against_computer:hover {
+    opacity: 1;
+}
+.two_players svg,
+.against_computer svg {
+    height: 50px;
+}
+.two_players svg *,
+.against_computer svg *,
+.computer_container svg * {
+    fill: var(--gray);
+}
+.computer_container {
+    position: absolute;
+    top: auto;
+    left: auto;
+    z-index: 11;
+    display: none;
+}
+.computer_container svg {
+    width: auto;
+}
